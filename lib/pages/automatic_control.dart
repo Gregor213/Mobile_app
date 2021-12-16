@@ -24,6 +24,7 @@ class _Automatic_ControlState extends State<Automatic_Control> {
             padding: const EdgeInsets.all(16.0),
               child: Row(
               children: [
+                //TODO odtąd coś jest zjebane
                 SizedBox.expand(child:
                       FractionallySizedBox(
                         widthFactor:0.5,
