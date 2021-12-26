@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 
-class Automatic_Control extends StatefulWidget {
+class manual_Control extends StatefulWidget {
   @override
-  _Automatic_ControlState createState() => _Automatic_ControlState();
+  _manual_ControlState createState() => _manual_ControlState();
 }
 
-class _Automatic_ControlState extends State<Automatic_Control> {
+class _manual_ControlState extends State<manual_Control> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -113,11 +113,14 @@ class _toggleControlState extends State<toggleControl>{
   @override
   Widget build(BuildContext context){
     return SwitchListTile(
-        title: Center(child: const Text("Tryb <- Automatyczny                -> manualny")),
+        title: Center(child: const Text("Tryb")),
         value: toggle,
         onChanged: (bool value){
           setState(() {
             toggle=value;
+            if (toggle == true){
+              Navigator.pushNamed(context, '/automatic');
+            }
           });
         }
     );

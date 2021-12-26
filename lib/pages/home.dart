@@ -11,9 +11,9 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[400],
+      backgroundColor: Colors.black87,
       appBar: AppBar(
-        backgroundColor: Colors.blue[900],
+        backgroundColor: Colors.blueGrey[900],
         title: Text('Okno główne'),
         centerTitle: true,
         elevation: 0,
@@ -21,44 +21,45 @@ class _HomeState extends State<Home> {
       body: Column(
         children: <Widget> [
           Container(
-            color: Colors.grey[500],
             padding: const EdgeInsets.all(16.0),
             child: Row(
               children:  const [
                 Text('Nazwa urządzenia:',
                 style: TextStyle(
+                  color: Colors.white60,
                   fontSize: 23.0,
                   fontWeight: FontWeight.bold,
                 ),
                 ),
                 SizedBox(width: 5.0),
-                Text('123',
-                  style: TextStyle(
-                    fontSize: 23.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                //TODO implement stateful widget
+                DeviceNameText(),
+                //</TODO>
               ],
             ),
           ),
           Container(
-            color: Colors.grey[500],
+            color: Colors.black87,
             padding: const EdgeInsets.all(16.0),
             child: Row(
               children: const [
                 Text('Stan Połączenia BT:',
                   style: TextStyle(
+                    color: Colors.white60,
                     fontSize: 23.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 SizedBox(width: 5.0),
+                //TODO implement stateful widget
                 Text('ON/OFF',
                   style: TextStyle(
+                    color: Colors.white60,
                     fontSize: 23.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                //</TODO>
               ],
             ),
           ),
@@ -66,15 +67,15 @@ class _HomeState extends State<Home> {
           Container(
             child: TextButton.icon(
               onPressed: () {
-                Navigator.pushNamed(context, '/automatic');
+                Navigator.pushNamed(context, '/manual');
               },
               icon: const Icon(Icons.account_tree_rounded,
                 size: 30.0,
-                color: Colors.black,
+                color: Colors.white60,
               ),
               label: const Text('Sterowanie',
                 style: TextStyle(
-                  color:Colors.black,
+                  color:Colors.white60,
                   fontSize: 20.0,
                 ),
               ),
@@ -83,5 +84,22 @@ class _HomeState extends State<Home> {
         ],
       ),
     );
+  }
+}
+class DeviceNameText extends StatefulWidget {
+  @override
+  _DeviceNameTextState createState() => _DeviceNameTextState();
+}
+class _DeviceNameTextState extends State<DeviceNameText> {
+  String deviceName = "Urządzenie 123";
+  @override
+  Widget build(BuildContext context) {
+    return Text(deviceName,
+        style:const TextStyle(
+          color: Colors.white60,
+          fontSize: 23.0,
+          fontWeight: FontWeight.bold,
+        ),
+      );
   }
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:apps/pages/loading.dart';
-import 'package:apps/pages/manual_control.dart';
+import 'package:apps/pages/automatic_control.dart';
 import 'package:apps/pages/home.dart';
 import 'package:apps/pages/menu.dart';
-import 'package:apps/pages/automatic_control.dart';
+import 'package:apps/pages/manual_control.dart';
 import 'package:flutter/services.dart';
 
 void main() => runApp(MaterialApp(
@@ -27,7 +27,7 @@ void main() => runApp(MaterialApp(
       WidgetsFlutterBinding.ensureInitialized();
       SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft])
           .then((_) {});
-        return Manual_Control();
+        return manual_Control();
       },
   }
 ));
