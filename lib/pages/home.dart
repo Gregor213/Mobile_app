@@ -1,4 +1,8 @@
+import 'package:apps/pages/bt_connection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_blue/flutter_blue.dart';
+
+FlutterBlue flutterBlue =FlutterBlue.instance;
 
 class Home extends StatefulWidget {
   @override
@@ -23,8 +27,8 @@ class _HomeState extends State<Home> {
           Container(
             padding: const EdgeInsets.all(16.0),
             child: Row(
-              children:  const [
-                Text('Nazwa urządzenia:',
+              children: const [
+                 Text('Nazwa urządzenia:',
                 style: TextStyle(
                   color: Colors.white60,
                   fontSize: 23.0,
@@ -32,9 +36,7 @@ class _HomeState extends State<Home> {
                 ),
                 ),
                 SizedBox(width: 5.0),
-                //TODO implement stateful widget
                 DeviceNameText(),
-                //</TODO>
               ],
             ),
           ),
@@ -51,21 +53,14 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 SizedBox(width: 5.0),
-                //TODO implement stateful widget
-                Text('ON/OFF',
-                  style: TextStyle(
-                    color: Colors.white60,
-                    fontSize: 23.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                //TODO implement stateful widget ON/OFF
+
                 //</TODO>
               ],
             ),
           ),
           const SizedBox(height: 10.0),
-          Container(
-            child: TextButton.icon(
+             TextButton.icon(
               onPressed: () {
                 Navigator.pushNamed(context, '/manual');
               },
@@ -80,6 +75,14 @@ class _HomeState extends State<Home> {
                 ),
               ),
             ),
+          ElevatedButton(
+            style: ButtonStyle(
+              //side: MaterialStateProperty.all(BorderSide.),
+                backgroundColor: MaterialStateProperty.all(Colors.blueGrey)),
+            onPressed: (){
+              Navigator.pushNamed(context,'/BT_Connection');
+            },//BT_Connection_Screen(),
+            child: Text("Połącz z Robotem poprzez Bluetooth",style: TextStyle(color: Colors.black87),),
           ),
         ],
       ),
@@ -87,6 +90,7 @@ class _HomeState extends State<Home> {
   }
 }
 class DeviceNameText extends StatefulWidget {
+  const DeviceNameText({Key? key}) : super(key: key);
   @override
   _DeviceNameTextState createState() => _DeviceNameTextState();
 }
@@ -102,4 +106,17 @@ class _DeviceNameTextState extends State<DeviceNameText> {
         ),
       );
   }
+}
+
+class Bluetooth extends StatefulWidget {
+  const Bluetooth({Key? key}) : super(key: key);
+  @override
+  _BluetoothState createState() => _BluetoothState();
+}
+
+class _BluetoothState extends State<Bluetooth> {
+  @override
+  Widget build(BuildContext context) {
+    return Text("siema");
+}
 }

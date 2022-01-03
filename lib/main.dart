@@ -5,6 +5,7 @@ import 'package:apps/pages/home.dart';
 import 'package:apps/pages/menu.dart';
 import 'package:apps/pages/manual_control.dart';
 import 'package:flutter/services.dart';
+import 'package:apps/pages/bt_connection.dart';
 
 void main() => runApp(MaterialApp(
   initialRoute: '/home',
@@ -29,6 +30,12 @@ void main() => runApp(MaterialApp(
           .then((_) {});
         return manual_Control();
       },
+      '/BT_Connection': (context) {
+      WidgetsFlutterBinding.ensureInitialized();
+      SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft])
+        .then((_) {});
+      return MyApp();
+      }
   }
 ));
 

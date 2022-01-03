@@ -9,12 +9,12 @@ class _Automatic_ControlState extends State<Automatic_Control> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[400],
+      backgroundColor: Colors.black87,
       appBar: AppBar(
-        backgroundColor: Colors.blue[900],
+        backgroundColor: Colors.blueGrey[900],
         title: const Text('Sterowanie Automatyczne'),
         centerTitle: true,
-        elevation: 0,
+        elevation: 1,
       ),
       body:
       Column(
@@ -25,12 +25,13 @@ class _Automatic_ControlState extends State<Automatic_Control> {
               flex:5,
               child: Container(
                   height: 200.0,
-                  color: Colors.grey[500],
-                  child: Container(child: Text("Statystyki"),
+                  child: Container(child: const Text("Statystyki",
+                      style: TextStyle(
+                          color: Colors.white60)),
                       margin: const EdgeInsets.all(20.0),
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: Colors.blue,
+                          color: Colors.blueGrey,
                           width:4,
                         ),
                       )
@@ -38,52 +39,42 @@ class _Automatic_ControlState extends State<Automatic_Control> {
               ),
             ),
             Expanded(
-              flex: 3,
-              child: Container(
-                  color:Colors.grey[500],
-                  child: Container(
-                      margin: const EdgeInsets.fromLTRB(40.0,10,40.0,10),
-                      //child: DecoratedBox(decoration: BoxDecoration(border: Border.all(color:Colors.cyan,width: 3,) ),)
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: <Widget>[
-                            ElevatedButton(onPressed: ()=>null,
-                                child: Text("L"),
+                flex: 3,
+                child: Container(
+                    margin: const EdgeInsets.fromLTRB(40.0,10,40.0,10),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          Expanded(
+                            flex: 6,
+                            child:Container(
+                                alignment: Alignment.center,
+                                child:DropdownItem()
+                            ),
+                          ),
+                          //TODO implement OK button function
+                          Expanded(
+                              flex:4,
+                              child: ElevatedButton(
                                 style: ButtonStyle(
-                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(700)
-                                        )
-                                    )
-                                )
-                            ),
-                            Expanded(
-                              flex: 4,
-                              child:Container(
-                                  alignment: Alignment.center,
-                                  child:DropdownItem()
-                              ),
-                            ),
-                            ElevatedButton(onPressed: ()=>null,
-                                child: Text("R"),
-                                style: ButtonStyle(
-                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(700)
-                                        )
-                                    )
-                                )
-                            ),
-                          ]
-                      )
-                  )
-              ),
+                                  backgroundColor: MaterialStateProperty.all(Colors.blueGrey)
+                                ),
+                                onPressed: ()=> null,
+                                child: Text("OK",
+                                style: TextStyle(
+                                    color: Colors.blueGrey[900]),
+                                ),
+                              )
+                              )
+                        ]
+                    )
+                )
             ),
             Expanded(
                 flex: 2,
                 child: Container(
-                  color: Colors.grey[500],
+                  color: Colors.black87,
                   child: toggleControl(),
                 )
             )
@@ -111,20 +102,23 @@ class _toggleControlState extends State<toggleControl>{
   @override
   Widget build(BuildContext context){
     return SwitchListTile(
-        title: Center(child: const Text("Tryb")),
+        activeTrackColor: Colors.blueGrey,
+        activeColor: Colors.white60,
+        title: Center(child: const Text("Tryb Automatyczny",
+        style:TextStyle(color: Colors.white60 ))),
         value: toggle,
+
         onChanged: (bool value){
           setState(() {
             toggle=value;
             if (toggle == false){
-              Navigator.pushNamed(context, '/manual');
+              Navigator.popAndPushNamed(context,'/manual');
             }
           });
         }
     );
   }
 }
-
 
 class DropdownItem extends StatefulWidget {
   @override
@@ -137,7 +131,9 @@ class _DropdownItemState extends State<DropdownItem>{
     return DropdownButton(
         value: selectedValue,
         icon: const Icon(Icons.amp_stories),
-        iconSize: 50,
+        iconSize: 40,
+        style: TextStyle(color: Colors.grey),
+        dropdownColor: Colors.black87,
         onChanged: (String? newValue){
           setState(() {
             selectedValue=newValue!;
