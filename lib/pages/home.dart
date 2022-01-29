@@ -2,16 +2,15 @@ import 'package:apps/pages/bt_connection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 
-FlutterBlue flutterBlue =FlutterBlue.instance;
 
+//FlutterBlue flutterBlue =FlutterBlue.instance;
 class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  //String deviceName =
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,7 +76,6 @@ class _HomeState extends State<Home> {
             ),
           ElevatedButton(
             style: ButtonStyle(
-              //side: MaterialStateProperty.all(BorderSide.),
                 backgroundColor: MaterialStateProperty.all(Colors.blueGrey)),
             onPressed: (){
               Navigator.pushNamed(context,'/BT_Connection');
@@ -95,7 +93,7 @@ class DeviceNameText extends StatefulWidget {
   _DeviceNameTextState createState() => _DeviceNameTextState();
 }
 class _DeviceNameTextState extends State<DeviceNameText> {
-  String deviceName = "Urządzenie 123";
+  String deviceName='';
   @override
   Widget build(BuildContext context) {
     return Text(deviceName,
@@ -107,16 +105,16 @@ class _DeviceNameTextState extends State<DeviceNameText> {
       );
   }
 }
-
-class Bluetooth extends StatefulWidget {
-  const Bluetooth({Key? key}) : super(key: key);
-  @override
-  _BluetoothState createState() => _BluetoothState();
-}
-
-class _BluetoothState extends State<Bluetooth> {
-  @override
-  Widget build(BuildContext context) {
-    return Text("siema");
-}
-}
+//TODO na razie nic to nie robi i nie wiem czy będzie coś robić
+// class Bluetooth extends StatefulWidget {
+//   const Bluetooth({Key? key}) : super(key: key);
+//   @override
+//   _BluetoothState createState() => _BluetoothState();
+// }
+//
+// class _BluetoothState extends State<Bluetooth> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Text("siema");
+// }
+// }

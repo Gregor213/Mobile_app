@@ -85,7 +85,7 @@ class _manual_ControlState extends State<manual_Control> {
                 flex: 2,
                 child: Container(
                   color: Colors.black87,
-                  child: toggleControl(),
+                  child: ToggleControl(),
                     )
               )
             ]
@@ -102,18 +102,20 @@ List<DropdownMenuItem<String>> get dropdownItems {
   return menuItems;
 }
 
-class toggleControl extends StatefulWidget {
+class ToggleControl extends StatefulWidget {
+  const ToggleControl({Key? key}) : super(key: key);
+
   @override
-  _toggleControlState createState() => _toggleControlState();
+  _ToggleControlState createState() => _ToggleControlState();
 }
 
-class _toggleControlState extends State<toggleControl>{
+class _ToggleControlState extends State<ToggleControl>{
   bool toggle = false;
   @override
   Widget build(BuildContext context){
     return SwitchListTile(
         inactiveTrackColor: Colors.blueGrey,
-        title: Center(child: const Text("Tryb Manualny",
+        title: const Center(child: Text("Tryb Manualny",
           style: TextStyle(color: Colors.white60 ))),
         value: toggle,
         onChanged: (bool value){

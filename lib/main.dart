@@ -10,7 +10,12 @@ import 'package:apps/pages/bt_connection.dart';
 void main() => runApp(MaterialApp(
   initialRoute: '/home',
     routes: {
-    '/': (context) => Loading_screen(),
+    '/': (context)  {
+      WidgetsFlutterBinding.ensureInitialized();
+      SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft])
+        .then((_) {});
+      return const LoadingScreen();
+      },
     '/home': (context) {
       WidgetsFlutterBinding.ensureInitialized();
       SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft])
@@ -34,7 +39,7 @@ void main() => runApp(MaterialApp(
       WidgetsFlutterBinding.ensureInitialized();
       SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft])
         .then((_) {});
-      return MyApp();
+      return const MyApp();
       }
   }
 ));
