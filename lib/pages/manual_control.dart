@@ -132,6 +132,8 @@ class _ToggleControlState extends State<ToggleControl>{
 
 
 class DropdownItem extends StatefulWidget {
+  const DropdownItem({Key? key}) : super(key: key);
+
   @override
   _DropdownItemState createState() => _DropdownItemState();
 }

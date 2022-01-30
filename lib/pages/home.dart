@@ -1,9 +1,11 @@
+import 'package:apps/pages/bluetooth_device_list_entry.dart';
 import 'package:apps/pages/bt_connection.dart';
+import 'package:apps/pages/chat_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 
 
-//FlutterBlue flutterBlue =FlutterBlue.instance;
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
   @override
@@ -26,7 +28,7 @@ class _HomeState extends State<Home> {
           Container(
             padding: const EdgeInsets.all(16.0),
             child: Row(
-              children: const [
+              children: const[
                  Text('Nazwa urządzenia:',
                 style: TextStyle(
                   color: Colors.white60,
@@ -35,26 +37,7 @@ class _HomeState extends State<Home> {
                 ),
                 ),
                 SizedBox(width: 5.0),
-                DeviceNameText(),
-              ],
-            ),
-          ),
-          Container(
-            color: Colors.black87,
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              children: const [
-                Text('Stan Połączenia BT:',
-                  style: TextStyle(
-                    color: Colors.white60,
-                    fontSize: 23.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(width: 5.0),
-                //TODO implement stateful widget ON/OFF
-
-                //</TODO>
+                DeviceNameText()
               ],
             ),
           ),
@@ -76,11 +59,12 @@ class _HomeState extends State<Home> {
             ),
           ElevatedButton(
             style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.blueGrey)),
+                backgroundColor: MaterialStateProperty.all(Colors.blueGrey[900])),
             onPressed: (){
               Navigator.pushNamed(context,'/BT_Connection');
             },//BT_Connection_Screen(),
-            child: Text("Połącz z Robotem poprzez Bluetooth",style: TextStyle(color: Colors.black87),),
+            child: const Text("Połącz z Robotem poprzez Bluetooth",
+              style: TextStyle(color: Colors.white60),),
           ),
         ],
       ),
@@ -88,15 +72,17 @@ class _HomeState extends State<Home> {
   }
 }
 class DeviceNameText extends StatefulWidget {
-  const DeviceNameText({Key? key}) : super(key: key);
+   const DeviceNameText({Key? key}) : super(key: key);
+
   @override
   _DeviceNameTextState createState() => _DeviceNameTextState();
 }
 class _DeviceNameTextState extends State<DeviceNameText> {
-  String deviceName='';
+  String? get deviceName => ChatPage.serverName;
   @override
+
   Widget build(BuildContext context) {
-    return Text(deviceName,
+    return Text(deviceName??'',
         style:const TextStyle(
           color: Colors.white60,
           fontSize: 23.0,
@@ -105,16 +91,3 @@ class _DeviceNameTextState extends State<DeviceNameText> {
       );
   }
 }
-//TODO na razie nic to nie robi i nie wiem czy będzie coś robić
-// class Bluetooth extends StatefulWidget {
-//   const Bluetooth({Key? key}) : super(key: key);
-//   @override
-//   _BluetoothState createState() => _BluetoothState();
-// }
-//
-// class _BluetoothState extends State<Bluetooth> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Text("siema");
-// }
-// }
