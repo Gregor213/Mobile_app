@@ -37,6 +37,7 @@ class MyHomePage extends StatefulWidget {
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
+
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -51,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   BackgroundCollectingTask? _collectingTask;
 
- // bool _autoAcceptPairingRequests = false;
+  bool _autoAcceptPairingRequests = false;
 
   @override
   void initState() {
@@ -175,6 +176,69 @@ class _MyHomePageState extends State<MyHomePage> {
                         style: const TextStyle(color: Colors.white60),),
                       onLongPress: null,
                     ),
+                    ListTile(
+                      title: _discoverableTimeoutSecondsLeft <= 0
+                          ? const Text("Niewidoczny",
+                              style: TextStyle(color:Colors.white60))
+                          : Text(
+                          "Widoczny przez ${_discoverableTimeoutSecondsLeft}s",
+                            style: const TextStyle(color: Colors.white60),),
+                      subtitle: const Text("MI-8",
+                        style: TextStyle(color: Colors.white60),),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Checkbox(
+                            activeColor: Colors.white60,
+                            value: _discoverableTimeoutSecondsLeft != 0,
+                            onChanged: null,
+                          ),
+                          // const IconButton(
+                          //   color: Colors.white60,
+                          //   icon: Icon(Icons.edit),
+                          //   onPressed: null,
+                          // ),
+                          IconButton(
+                            color: Colors.white60,
+                            icon: const Icon(Icons.refresh),
+                            onPressed: () async {
+                              print('Discoverable requested');
+                              final int timeout = (await FlutterBluetoothSerial.instance
+                                  .requestDiscoverable(60))!;
+                              if (timeout < 0) {
+                                print('Discoverable mode denied');
+                              } else {
+                                print(
+                                    'Discoverable mode acquired for $timeout seconds');
+                              }
+                              setState(() {
+                                _discoverableTimeoutTimer?.cancel();
+                                _discoverableTimeoutSecondsLeft = timeout;
+                                _discoverableTimeoutTimer =
+                                    Timer.periodic(Duration(seconds: 1), (Timer timer) {
+                                      setState(() {
+                                        if (_discoverableTimeoutSecondsLeft < 0) {
+                                          FlutterBluetoothSerial.instance.isDiscoverable
+                                              .then((isDiscoverable) {
+                                            if (isDiscoverable ?? false) {
+                                              print(
+                                                  "Discoverable after timeout... might be infinity timeout :F");
+                                              _discoverableTimeoutSecondsLeft = 0;
+                                            }
+                                          });
+                                          timer.cancel();
+                                          _discoverableTimeoutSecondsLeft = 0;
+                                        } else {
+                                          _discoverableTimeoutSecondsLeft -= 1;
+                                        }
+                                      });
+                                    });
+                              });
+                            },
+                          )
+                        ],
+                      ),
+                    ),
                     const Divider(color: Colors.blueGrey),
                     const ListTile(
                         title: Text('Nawiązywanie połączeń',
@@ -224,9 +288,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
                           if (selectedDevice != null) {
                             print('Connect -> selected ' + selectedDevice.address);
-                            _startChat(context, selectedDevice);
-                            print(selectedDevice.name);
-                            //MyHomePage.deviceName=selectedDevice.name;
+                            //_startChat(context, selectedDevice);
 
                           } else {
                             print('Connect -> no device selected');

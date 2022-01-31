@@ -2,13 +2,13 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:apps/pages/bt_connection.dart';
+import 'package:apps/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
 class ChatPage extends StatefulWidget {
   final BluetoothDevice server;
-
-  static String? serverName;
 
   const ChatPage({required this.server});
 
@@ -37,7 +37,6 @@ class _ChatPage extends State<ChatPage> {
 
   bool isConnecting = true;
   bool get isConnected => (connection?.isConnected ?? false);
-
   bool isDisconnecting = false;
 
 
@@ -65,7 +64,7 @@ class _ChatPage extends State<ChatPage> {
         } else {
           print('Disconnected remotely!');
         }
-        if (this.mounted) {
+        if (mounted) {
           setState(() {});
         }
       });
@@ -112,15 +111,14 @@ class _ChatPage extends State<ChatPage> {
             : MainAxisAlignment.start,
       );
     }).toList();
-      ChatPage.serverName=widget.server.name?? 'Unknown';
-     final serverName = ChatPage.serverName;
+    final serverName=widget.server.name?? "Unknown";
     return Scaffold(
       appBar: AppBar(
           title: (isConnecting
-              ? Text('Connecting chat to ' + serverName! + '...')
+              ? Text('Connecting chat to ' + serverName + '...')
               : isConnected
-              ? Text('Live chat with ' + serverName!)
-              : Text('Chat log with ' + serverName!))),
+              ? Text('Live chat with ' + serverName)
+              : Text('Chat log with ' + serverName))),
       body: SafeArea(
         child: Column(
           children: <Widget>[

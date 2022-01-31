@@ -85,9 +85,9 @@ class _Automatic_ControlState extends State<Automatic_Control> {
 }
 List<DropdownMenuItem<String>> get dropdownItems {
   List<DropdownMenuItem<String>> menuItems = [
-    DropdownMenuItem(child: Text("Przegub 1"), value: "Przegub1",),
-    DropdownMenuItem(child: Text("Przegub 2"), value: "Przegub2"),
-    DropdownMenuItem(child: Text("Przegub 3"), value: "Przegub3"),
+    DropdownMenuItem(child: Text("Trasa 1"), value: "Trasa1",),
+    DropdownMenuItem(child: Text("Trasa 2"), value: "Trasa2"),
+    DropdownMenuItem(child: Text("Trasa 3"), value: "Trasa3"),
   ];
   return menuItems;
 }
@@ -125,7 +125,7 @@ class DropdownItem extends StatefulWidget {
   _DropdownItemState createState() => _DropdownItemState();
 }
 class _DropdownItemState extends State<DropdownItem>{
-  String selectedValue = "Przegub1";
+  String selectedValue = "Trasa1";
   @override
   Widget build(BuildContext context) {
     return DropdownButton(

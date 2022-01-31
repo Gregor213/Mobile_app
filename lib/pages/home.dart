@@ -25,24 +25,8 @@ class _HomeState extends State<Home> {
       ),
       body: Column(
         children: <Widget> [
-          Container(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              children: const[
-                 Text('Nazwa urządzenia:',
-                style: TextStyle(
-                  color: Colors.white60,
-                  fontSize: 23.0,
-                  fontWeight: FontWeight.bold,
-                ),
-                ),
-                SizedBox(width: 5.0),
-                DeviceNameText()
-              ],
-            ),
-          ),
-          const SizedBox(height: 10.0),
-             TextButton.icon(
+             const SizedBox(height: 50.0),
+             Center(child:TextButton.icon(
               onPressed: () {
                 Navigator.pushNamed(context, '/manual');
               },
@@ -56,38 +40,18 @@ class _HomeState extends State<Home> {
                   fontSize: 20.0,
                 ),
               ),
-            ),
+            ),),
           ElevatedButton(
             style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.blueGrey[900])),
             onPressed: (){
               Navigator.pushNamed(context,'/BT_Connection');
-            },//BT_Connection_Screen(),
+            },
             child: const Text("Połącz z Robotem poprzez Bluetooth",
               style: TextStyle(color: Colors.white60),),
           ),
         ],
       ),
     );
-  }
-}
-class DeviceNameText extends StatefulWidget {
-   const DeviceNameText({Key? key}) : super(key: key);
-
-  @override
-  _DeviceNameTextState createState() => _DeviceNameTextState();
-}
-class _DeviceNameTextState extends State<DeviceNameText> {
-  String? get deviceName => ChatPage.serverName;
-  @override
-
-  Widget build(BuildContext context) {
-    return Text(deviceName??'',
-        style:const TextStyle(
-          color: Colors.white60,
-          fontSize: 23.0,
-          fontWeight: FontWeight.bold,
-        ),
-      );
   }
 }
